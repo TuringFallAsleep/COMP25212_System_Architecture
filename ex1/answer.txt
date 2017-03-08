@@ -1,0 +1,28 @@
+PART 3 - (3 marks)
+Why are the times reported in PART 1 and PART 2 different?
+- Because nStructs is the number of structures to keep accessing which defines working set. In PART 1, nStructs is 15 which is less than it in PART 2, that is 1M. Thus, in PATR 2, progress need to fatch from higer level of memory hierarchy rather than PART 1, which will cost more time.
+
+PART 6 - (4 marks)
+Explain how cache size reported in PART 4 relates to the values of nStruct at which performance changes quickly.
+- Cache size in PART 4 is 6144KB, and every struct entry has size of 40. Thus the cache can store less than 153850 structs. In PART 5 we can see around nStruct is 70000, less than 153850, the curve becomes almost horizontal, which means cache has been full.
+
+PART 7 - (3 x 2 marks)
+Identify three regions of your graph with different performance characteristics and explain each region:
+In region 1: - From 1 to 20000. The cache has lots of space, so all data can be stored in it. In iteration operations, CPU only need to fetch data from cache(i.e. cache hit) which is very fast.
+In region 2: - From 20000 to 70000. In this narrow regin, cache space becomes limited, hit rate gets lower dramaticly with the number of nStruct grows up.
+In region 3: - Larger than 70000. In this regin, cache is almost full, so hit rate becomes stable. Thus, the operating time is also becomes stable.
+
+PART 8 - (5 marks)
+The cachetest program as written simply tests memory reads over different cache working sets.  Modify the program so that every iteration also writes into the structure and repeat the performance measurement.
+How does the characteristic vary? Why?
+
+PART 9 - (4 marks)
+The cachetest program as written uses reads to a structure of a certain number of bytes in width.  What happens if we double the size of the structure?  What happens if we halve its size?
+- If I double the size of structure, the data block that can stored in cache entry sturcture will also be doubled. Thus, the miss rate will be lower. If I halve the size, the data block that can stored in cache entry sturcture will also be havled. Thus, the miss rate will be higher.
+
+PART 10 - (10 marks)
+How could we enhance the cachetest program to determine whether a processor cache is direct mapped, set associative, or fully associative?
+- We can set a serises of different continuous binary number as input, i.e. make sure every input is unique, and observe the plot diagram to judge what kind of the cache is. 
+	If there are only 2 rigins, one for the cache is not full, the other for full, it could be fully associative cache. 
+	If there are are 3 rigins, and the first rigin's width is as same as the second, it could be direct mapped.
+	If there are are 3 rigins, and the first rigin's width is n times of the second, it could be n-set associative mapped.
