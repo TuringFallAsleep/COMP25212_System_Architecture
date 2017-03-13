@@ -21,14 +21,14 @@ public class CacheSim {
             in.mark(1000000);//needed to repeatedly read data file
 	    csize =32; //small cache for initial tests
             lsize =8;
-	    System.out.println("Unified Cache - Secret");
-	    Cache UnifiedCache = new SecretCache(csize,lsize);
+	    System.out.println("Direct Mapped Cache");
+	    Cache UnifiedCache = new DirectMappedCache(csize,lsize);
 	    doSimul(UnifiedCache,UnifiedCache,true);
 	    
 	    csize =8192; //larger cache for real experiments
             lsize =32;
-	    System.out.println("Unified Cache - Secret");
-	    UnifiedCache = new SecretCache(csize,lsize);
+	    System.out.println("Direct Mapped Cache");
+	    UnifiedCache = new DirectMappedCache(csize,lsize);
 	    doSimul(UnifiedCache,UnifiedCache,true);
 
 	    } catch (FileNotFoundException e) {
@@ -53,16 +53,18 @@ public class CacheSim {
 	    while(true) {
 		MemAccess access = getAccess();
 		if (access.atype == Read){
-		    //  System.out.println(Int.toHexString(access.addr)+" Read");
+//			System.out.println("READING!!!");
+		      System.out.println(Integer.toHexString(access.addr)+" Read");
 		    DataCache.read(access.addr);
 		}
 		else if (access.atype == Write){
-		    //  System.out.println(Int.toHexString(access.addr)+" Write");
+//			System.out.println("WRITING!!!");
+		      System.out.println(Integer.toHexString(access.addr)+" Write");
 		    DataCache.write(access.addr,new Integer(0));
 		}
 		else if (access.atype == Fetch){
 		    inst_fetches++;
-		    //  System.out.println(Int.toHexString(access.addr)+" Fetch");
+		      System.out.println(Integer.toHexString(access.addr)+" Fetch");
 		    InstructionCache.read(access.addr);
 		}
 		else System.out.println("Unknown Access Type");
@@ -70,7 +72,7 @@ public class CacheSim {
 	} catch (NullPointerException e) {
 	   //end of trace file and simulation run 
 	   if (printing) {  
-	    	System.out.println("Trace Input Ended");
+//	    	System.out.println("Trace Input Ended");
 	    	if (InstructionCache == DataCache){
 			System.out.println("\nUnified Cache Statistics\n");
 			InstructionCache.dumpStats();
