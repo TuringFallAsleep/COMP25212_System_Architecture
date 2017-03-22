@@ -21,14 +21,14 @@ public class CacheSim {
             in.mark(1000000);//needed to repeatedly read data file
 	    csize =32; //small cache for initial tests
             lsize =8;
-	    System.out.println("Unified Cache - Secret");
-	    Cache UnifiedCache = new SecretCache(csize,lsize);
+	    System.out.println("Fully Associative Cache");
+	    Cache UnifiedCache = new AssocCache(csize,lsize);
 	    doSimul(UnifiedCache,UnifiedCache,true);
 	    
 	    csize =8192; //larger cache for real experiments
             lsize =32;
-	    System.out.println("Unified Cache - Secret");
-	    UnifiedCache = new SecretCache(csize,lsize);
+	    System.out.println("Fully Associative Cache");
+	    UnifiedCache = new AssocCache(csize,lsize);
 	    doSimul(UnifiedCache,UnifiedCache,true);
 
 	    } catch (FileNotFoundException e) {
